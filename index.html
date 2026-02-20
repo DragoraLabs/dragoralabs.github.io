@@ -3,29 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DragoraLabs — Open-Source Innovation</title>
+  <title>DragoraLabs — Free & Fun Open-Source Tools</title>
   
-  <!-- Favicon (your GitHub avatar, circular crop works great) -->
   <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" />
   
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome 6 Free -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     :root {
       --bg: #0a0e17;
       --accent: #00d4ff;
-      --accent-dark: #0099cc;
+      --dragon-red: #ff4500;
       --text: #e0f7ff;
       --text-muted: #a3bffa;
       --card-bg: rgba(20, 25, 40, 0.65);
       --border: rgba(0, 212, 255, 0.18);
-      --dragon-red: #ff4500;     /* fallback for dragon accents */
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -42,6 +38,67 @@
       background-attachment: fixed;
     }
 
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10, 14, 23, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .topbar .logo-small {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem;
+      background: linear-gradient(90deg, var(--dragon-red), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-links .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-github { background: #333; color: white; }
+    .btn-github:hover { background: #444; }
+
+    .btn-join { 
+      background: var(--dragon-red); 
+      color: white; 
+      box-shadow: 0 0 15px rgba(255,69,0,0.4); 
+    }
+    .btn-join:hover { 
+      background: #ff6347; 
+      transform: translateY(-2px); 
+      box-shadow: 0 0 25px rgba(255,69,0,0.6); 
+    }
+
     header {
       position: relative;
       height: 100vh;
@@ -52,6 +109,7 @@
       text-align: center;
       padding: 0 5%;
       overflow: hidden;
+      padding-top: 80px;
     }
 
     header::before {
@@ -62,22 +120,17 @@
       z-index: -2;
     }
 
-    /* Optional: subtle dragon logo as very faint background */
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: url('https://avatars.githubusercontent.com/u/225836782?s=800&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4') center/cover no-repeat; /* larger size variant */
+      background: url('https://avatars.githubusercontent.com/u/225836782?s=800&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4') center/cover no-repeat;
       opacity: 0.04;
       mix-blend-mode: screen;
       z-index: -1;
-      pointer-events: none;
     }
 
-    .hero-content {
-      max-width: 1100px;
-      z-index: 2;
-    }
+    .hero-content { max-width: 1100px; z-index: 2; }
 
     .logo-container {
       display: flex;
@@ -86,6 +139,19 @@
       gap: 1.5rem;
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.03); opacity: 0.95; }
+    }
+
+    .logo-container:hover {
+      animation: none;
+      transform: scale(1.08) rotate(3deg);
+      filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.7));
+      transition: all 0.4s ease;
     }
 
     .logo-avatar {
@@ -93,38 +159,24 @@
       height: 140px;
       border-radius: 50%;
       border: 4px solid rgba(0, 212, 255, 0.4);
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.5), 0 0 20px rgba(255, 69, 0, 0.4);
+      box-shadow: 0 0 35px rgba(0, 212, 255, 0.45), 0 0 18px rgba(255, 69, 0, 0.35);
       object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .logo-avatar:hover {
-      transform: scale(1.08) rotate(5deg);
     }
 
     .logo-text {
       font-family: 'Orbitron', monospace;
-      font-size: 4.5rem;
+      font-size: 4.2rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #ff4500, #ff8c00, #00d4ff, #7c3aed);
+      background: linear-gradient(90deg, #ff4500, #ff8c00, #00d4ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: 3px;
-      text-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+      letter-spacing: 2px;
+      text-shadow: 0 0 18px rgba(255, 69, 0, 0.5);
     }
 
-    h1 {
-      font-size: 3.2rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-    }
+    h1 { font-size: 3.2rem; margin-bottom: 1.5rem; font-weight: 700; }
 
-    .subtitle {
-      font-size: 1.4rem;
-      max-width: 720px;
-      margin: 0 auto 2.5rem;
-      color: var(--text-muted);
-    }
+    .subtitle { font-size: 1.4rem; max-width: 720px; margin: 0 auto 2.5rem; color: var(--text-muted); }
 
     .cta-buttons {
       display: flex;
@@ -143,29 +195,48 @@
     }
 
     .btn-primary {
-      background: linear-gradient(90deg, var(--accent), #ff4500);
+      background: linear-gradient(90deg, var(--accent), var(--dragon-red));
       color: #000;
       box-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
     }
 
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(255, 69, 0, 0.6); }
 
-    .btn-outline {
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-
-    .btn-outline:hover { background: rgba(0, 212, 255, 0.12); }
-
     section { padding: 100px 5%; }
 
     h2 {
       text-align: center;
       font-size: 3rem;
-      margin-bottom: 4rem;
-      background: linear-gradient(90deg, #fff, #ff4500, #00d4ff);
+      margin-bottom: 2.5rem;
+      background: linear-gradient(90deg, #fff, var(--dragon-red), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .story {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .story p { margin-bottom: 1.2rem; }
+
+    .story strong { color: white; }
+
+    .story-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-left: 0.6rem;
+      border: 2px solid rgba(255, 69, 0, 0.5);
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
     }
 
     .projects-grid {
@@ -173,7 +244,7 @@
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 2.2rem;
       max-width: 1300px;
-      margin: 0 auto;
+      margin: 4rem auto 0;
     }
 
     .project-card {
@@ -203,7 +274,7 @@
       transition: color 0.4s ease;
     }
 
-    .project-card:hover .card-img { color: #ff4500; }
+    .project-card:hover .card-img { color: var(--dragon-red); }
 
     .card-content { padding: 2rem; }
 
@@ -254,21 +325,40 @@
     }
 
     @media (max-width: 768px) {
-      .logo-text { font-size: 3.2rem; }
+      .topbar { padding: 1rem 5%; flex-direction: column; gap: 1rem; }
+      .nav-links { gap: 1.2rem; justify-content: center; }
       .logo-avatar { width: 100px; height: 100px; }
+      .logo-text { font-size: 3rem; }
       h1 { font-size: 2.6rem; }
-      section { padding: 80px 5%; }
+      section { padding: 80px 5%; padding-top: 120px; }
+      .story { padding: 2rem; }
+      .story-logo { width: 50px; height: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <nav class="topbar">
+    <a href="#" class="logo-small">DragoraLabs</a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#story">Story</a>
+      <a href="#projects">Projects</a>
+      <a href="https://dragoralabs.github.io/dev" target="_blank" class="btn btn-join">
+        <i class="fa-solid fa-users"></i> Join Team
+      </a>
+      <a href="https://github.com/DragoraLabs" target="_blank" class="btn btn-github">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+    </div>
+  </nav>
+
+  <header id="home">
     <div class="hero-content">
       <div class="logo-container">
         <img 
           src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" 
-          alt="DragoraLabs Dragon Logo" 
+          alt="DragoraLabs" 
           class="logo-avatar"
         />
         <div class="logo-text">DRAGORA LABS</div>
@@ -276,63 +366,112 @@
 
       <h1>Open-Source Tools Forged in Dragonfire</h1>
       <p class="subtitle">
-        Empower your workflows with blazing-fast, intelligent, and completely free open-source projects.  
-        Built by DragoraLabs — where innovation meets mythical power.
+        Free, fun, and zero paywalls — because tools should be enjoyable for everyone.
       </p>
       
       <div class="cta-buttons">
+        <a href="#story" class="btn btn-primary">Read Our Story</a>
         <a href="#projects" class="btn btn-primary">Explore Projects</a>
-        <a href="https://github.com/DragoraLabs" target="_blank" class="btn btn-outline">
-          <i class="fa-brands fa-github"></i> GitHub
-        </a>
       </div>
     </div>
   </header>
 
+  <section id="story">
+    <h2>How DragoraLabs Got Started</h2>
+    <div class="story">
+      <p>Hi there —<br>I'm the person behind DragoraLabs, which used to go by Bettergaming716.</p>
+      
+      <p>Some time ago, I went looking for open-source tools: server dashboards, game panels, small automation helpers. I figured there had to be solid options out there.</p>
+      
+      <p>Instead, most projects seemed bare-bones, unmaintained, or locked behind a paywall. If you wanted the good stuff, you had to subscribe. For something that's supposed to be open-source, that felt off.</p>
+      
+      <p>So I chose a different path.</p>
+      
+      <p>I started making my own tools — free to use, open-source from day one, and with no premium tiers. Just things built for fun and shared because that's how it should be. Maybe it's a bit idealistic, but it seemed worth trying.</p>
+      
+      <p>That idea became DragoraLabs.</p>
+      
+      <p>It's where I tinker, fix small problems, and release tools anyone can use, fork, or improve. Think of it as a workshop more than a brand.</p>
+      
+      <p>It's still early days.</p>
+      
+      <p>NodeDash is in alpha, and the Pterodactyl tools are simple scripts for now.</p>
+      
+      <p>The plan is to start small, keep it open, and enjoy the process. If it grows, great. If not, that's okay too.</p>
+      
+      <p>If anything here helps you, you're welcome to star the repo, contribute, or just use the tools.</p>
+      
+      <p><strong>DragoraLabs = free + fun. That's it.</strong> 
+        <img src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" alt="DragoraLabs" class="story-logo">
+      </p>
+    </div>
+  </section>
+
   <section id="projects">
     <h2>Our Main Open-Source Projects</h2>
-    
     <div class="projects-grid">
-
-      <!-- Your project cards remain the same – just example -->
       <div class="project-card">
-        <div class="card-img"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="card-img"><i class="fa-solid fa-gauge-high"></i></div>
         <div class="card-content">
-          <h3 class="project-title">NovaPulse</h3>
-          <p class="project-desc">Real-time analytics with AI insights — self-hostable & blazing fast.</p>
+          <h3 class="project-title">NodeDash</h3>
+          <p class="project-desc">Early alpha (v0.0.1) Node.js dashboard — heavy work-in-progress. Incomplete UI, ongoing bug fixes...</p>
           <div class="tags">
-            <span class="tag">Dashboard</span><span class="tag">AI</span><span class="tag">Analytics</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Alpha</span>
           </div>
         </div>
         <div class="card-footer">
-          <a href="#" style="color:#ff8c00;text-decoration:none;font-weight:600;">
+          <a href="https://github.com/DragoraLabs/nodedash.github.com" target="_blank" style="color:#ff8c00; text-decoration:none; font-weight:600;">
             <i class="fa-solid fa-code-branch"></i> GitHub
           </a>
-          <span class="stars">★ 1.8k</span>
+          <span class="stars">★ 0</span>
         </div>
       </div>
 
-      <!-- Add your real projects here -->
-
+      <div class="project-card">
+        <div class="card-img"><i class="fa-solid fa-server"></i></div>
+        <div class="card-content">
+          <h3 class="project-title">Pterodactyl Tools</h3>
+          <p class="project-desc">Simple Shell scripts and installer helpers (geared toward Pterodactyl panel or server management)...</p>
+          <div class="tags">
+            <span class="tag">Shell</span>
+            <span class="tag">Installer</span>
+            <span class="tag">Server</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/DragoraLabs/pterodactyl" target="_blank" style="color:#ff8c00; text-decoration:none; font-weight:600;">
+            <i class="fa-solid fa-code-branch"></i> GitHub
+          </a>
+          <span class="stars">★ 1</span>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer>
     <p>
-      <img 
-        src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" 
-        alt="DragoraLabs" 
-        class="footer-logo"
-      />
-      © 2026 DragoraLabs — Unleashing open-source dragons. All projects free & open under permissive licenses.
+      <img src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" alt="DragoraLabs" class="footer-logo"/>
+      © 2026 DragoraLabs — Started for fun, built to stay free. All projects open-source.
     </p>
     <p style="margin-top:1.2rem;">
       <a href="https://github.com/DragoraLabs" style="color:var(--accent); margin:0 1rem;">
-        <i class="fa-brands fa-github"></i> GitHub
+        <i class="fa-brands fa-github"></i> github.com/DragoraLabs
       </a>
-      <!-- Add Twitter/Discord if you have them -->
     </p>
   </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 
 </body>
 </html>
