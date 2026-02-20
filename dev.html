@@ -1,167 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DragoraLabs Discord • Join the DragoraLabs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DragoraLabs • Dragon's Lair</title>
 
-  <link rel="icon" type="image/png"
-    href="https://avatars.githubusercontent.com/u/225836782?s=400&v=4" />
+<link rel="icon" type="image/png"
+href="https://avatars.githubusercontent.com/u/225836782?s=400&v=4">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root {
-  --bg: #0a0e17;
-  --accent: #00d4ff;
-  --dragon-red: #ff4500;
-  --text: #e0f7ff;
-  --text-muted: #a3bffa;
-  --card-bg: rgba(20, 25, 40, 0.75);
-  --border: rgba(0, 212, 255, 0.18);
+:root{
+--bg:#0a0e17;
+--accent:#00d4ff;
+--dragon:#ff4500;
+--text:#e0f7ff;
+--muted:#9fb4ff;
+--card:rgba(20,25,40,.8);
+--border:rgba(0,212,255,.15);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+border:none;
+outline:none;
+}
+
 body{
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  min-height:100vh;
-  background-image:
-    radial-gradient(circle at 15% 50%, rgba(0,212,255,0.08), transparent 40%),
-    radial-gradient(circle at 85% 30%, rgba(255,69,0,0.06), transparent 45%);
-  background-attachment: fixed;
+background:var(--bg);
+color:var(--text);
+font-family:'Inter',sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+background-image:
+radial-gradient(circle at 20% 50%, rgba(0,212,255,.07), transparent 40%),
+radial-gradient(circle at 80% 30%, rgba(255,69,0,.06), transparent 50%);
 }
 
 /* Topbar */
 .topbar{
-  position:fixed;
-  top:0;left:0;right:0;
-  background:rgba(10,14,23,0.95);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  z-index:1000;
-  padding:1rem 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:80px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 6%;
+background:rgba(10,14,23,.95);
+backdrop-filter:blur(14px);
+z-index:1000;
 }
+
 .logo-small{
-  font-family:'Orbitron',monospace;
-  font-size:2rem;
-  background:linear-gradient(90deg,var(--dragon-red),var(--accent));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  font-weight:700;
-  text-decoration:none;
+font-family:'Orbitron',monospace;
+font-size:1.8rem;
+font-weight:700;
+text-decoration:none;
+background:linear-gradient(90deg,var(--dragon),var(--accent));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.join-btn{
+display:inline-flex;
+align-items:center;
+gap:.8rem;
+background:#5865F2;
+color:#fff;
+padding:14px 28px;
+border-radius:50px;
+font-weight:600;
+text-decoration:none;
+transition:.3s ease;
+box-shadow:0 0 25px rgba(88,101,242,.5);
+}
+
+.join-btn:hover{
+transform:translateY(-4px);
+box-shadow:0 0 50px rgba(88,101,242,.8);
 }
 
 /* Hero */
 header{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:0 5%;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding-top:120px;
 }
-.hero-content{max-width:1100px;}
+
+.hero-content{
+max-width:1000px;
+padding:0 20px;
+}
 
 .logo-big{
-  width:200px;height:200px;
-  border-radius:50%;
-  border:6px solid rgba(0,212,255,0.45);
-  box-shadow:0 0 60px rgba(255,69,0,0.6);
-  margin-bottom:2rem;
+width:180px;
+height:180px;
+border-radius:50%;
+border:4px solid rgba(0,212,255,.4);
+box-shadow:0 0 40px rgba(255,69,0,.6);
+margin-bottom:30px;
 }
 
 h1{
-  font-size:4.5rem;
-  font-family:'Orbitron',monospace;
-  background:linear-gradient(90deg,#ff4500,#ff8c00,#00d4ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:1.5rem;
+font-family:'Orbitron',monospace;
+font-size:4rem;
+margin-bottom:20px;
+background:linear-gradient(90deg,#ff4500,#ff8c00,#00d4ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .subtitle{
-  font-size:1.5rem;
-  margin-bottom:3rem;
-  color:var(--text-muted);
+font-size:1.4rem;
+color:var(--muted);
+margin-bottom:60px;
+line-height:1.6;
 }
 
-/* Discord Card */
+/* Card */
 .discord-widget{
-  background:var(--card-bg);
-  backdrop-filter:blur(12px);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:3rem 2.5rem;
-  max-width:580px;
-  margin:0 auto 4rem;
-  box-shadow:0 0 40px rgba(255,69,0,0.25);
-}
-.discord-widget h3{
-  font-size:2rem;
-  margin-bottom:1.5rem;
-}
-.discord-status{
-  font-size:1.3rem;
-  margin:1.5rem 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:1rem;
-}
-.status-dot{
-  width:16px;height:16px;
-  border-radius:50%;
-  background:#43b581;
-  box-shadow:0 0 16px #43b581;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:40px;
+max-width:550px;
+margin:0 auto 60px;
+box-shadow:0 0 40px rgba(255,69,0,.2);
 }
 
-.join-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:1rem;
-  background:#5865F2;
-  color:white;
-  padding:1.2rem 3rem;
-  font-size:1.4rem;
-  font-weight:700;
-  border-radius:50px;
-  text-decoration:none;
-  transition:0.3s;
-  box-shadow:0 0 30px rgba(88,101,242,0.5);
+.discord-widget h3{
+font-size:1.8rem;
+margin-bottom:20px;
 }
-.join-btn:hover{
-  transform:translateY(-4px) scale(1.05);
-  box-shadow:0 0 60px rgba(88,101,242,0.9);
+
+.discord-status{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+font-size:1.2rem;
+margin-bottom:30px;
+}
+
+.status-dot{
+width:14px;
+height:14px;
+border-radius:50%;
+background:#43b581;
+box-shadow:0 0 10px #43b581;
 }
 
 /* Chart */
 .chart-container{
-  max-width:1000px;
-  margin:0 auto 6rem;
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:3rem;
+max-width:900px;
+margin:0 auto 80px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:40px;
 }
 
 footer{
-  text-align:center;
-  padding:4rem 5%;
-  color:var(--text-muted);
+text-align:center;
+padding:50px 20px;
+color:var(--muted);
+font-size:.9rem;
 }
 </style>
 </head>
@@ -169,18 +187,17 @@ footer{
 <body>
 
 <nav class="topbar">
-  <a href="#" class="logo-small">DragoraLabs</a>
-  <a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn">
-    <i class="fab fa-discord"></i> Join Discord
-  </a>
+<a href="#" class="logo-small">DragoraLabs</a>
+<a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn">
+<i class="fab fa-discord"></i> Join Discord
+</a>
 </nav>
 
 <header>
 <div class="hero-content">
 
 <img src="https://avatars.githubusercontent.com/u/225836782?s=400&v=4"
-     alt="DragoraLabs Dragon"
-     class="logo-big"/>
+class="logo-big" alt="DragoraLabs Logo">
 
 <h1>Dragon's Lair</h1>
 
@@ -190,21 +207,21 @@ Free open-source tools • Community • Real-time help
 </p>
 
 <div class="discord-widget">
-  <h3>Live Server Status</h3>
-  <div class="discord-status">
-    <span class="status-dot"></span>
-    <strong id="live-status">Loading...</strong>
-  </div>
-
-  <a href="https://discord.gg/rScRjWjKPw" target="_blank"
-     class="join-btn" style="margin-top:2rem;">
-    <i class="fab fa-discord fa-lg"></i> Join the Server
-  </a>
+<h3>Live Server Status</h3>
+<div class="discord-status">
+<span class="status-dot"></span>
+<strong id="live-status">Loading...</strong>
+</div>
+<a href="https://discord.gg/rScRjWjKPw"
+target="_blank"
+class="join-btn">
+<i class="fab fa-discord"></i> Join the Server
+</a>
 </div>
 
 <div class="chart-container">
-  <h3 style="text-align:center;margin-bottom:2rem;">Community Growth</h3>
-  <canvas id="growthChart" height="200"></canvas>
+<h3 style="margin-bottom:20px;">Community Growth</h3>
+<canvas id="growthChart"></canvas>
 </div>
 
 </div>
@@ -214,73 +231,69 @@ Free open-source tools • Community • Real-time help
 © 2026 DragoraLabs • Free forever • Join the lair
 </footer>
 
-<!-- Discord Stats Script -->
 <script>
 async function fetchDiscordStats(){
-  try{
-    const res = await fetch(
-      "https://discord.com/api/v9/invites/rScRjWjKPw?with_counts=true"
-    );
-    const data = await res.json();
+try{
+const res = await fetch(
+"https://discord.com/api/v9/invites/rScRjWjKPw?with_counts=true"
+);
+const data = await res.json();
 
-    const members = data.approximate_member_count || 0;
-    const online = data.approximate_presence_count || 0;
+const members = data.approximate_member_count || 0;
+const online = data.approximate_presence_count || 0;
 
-    document.getElementById("live-status").innerHTML =
-      `${members} members • <span style="color:#43b581">${online} online</span>`;
+document.getElementById("live-status").innerHTML =
+`${members} members • <span style="color:#43b581">${online} online</span>`;
 
-    growthChart.data.datasets[0].data[6] = members;
-    growthChart.update();
+growthChart.data.datasets[0].data[6] = members;
+growthChart.update();
 
-  }catch(err){
-    document.getElementById("live-status").innerHTML =
-      "Unable to load live stats";
-  }
+}catch{
+document.getElementById("live-status").innerText =
+"Live stats unavailable";
+}
 }
 
 fetchDiscordStats();
 setInterval(fetchDiscordStats,60000);
 
-/* Chart */
 const ctx = document.getElementById("growthChart").getContext("2d");
 
 const growthChart = new Chart(ctx,{
-  type:"line",
-  data:{
-    labels:["Jan","Feb","Mar","Apr","May","Jun","Now"],
-    datasets:[{
-      label:"Members",
-      data:[1,2,4,6,9,12,19],
-      borderColor:"#00d4ff",
-      backgroundColor:"rgba(0,212,255,0.2)",
-      tension:0.4,
-      fill:true,
-      pointBackgroundColor:"#ff4500"
-    }]
-  },
-  options:{
-    responsive:true,
-    plugins:{legend:{display:false}},
-    scales:{
-      y:{beginAtZero:true},
-      x:{grid:{display:false}}
-    }
-  }
+type:"line",
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Now"],
+datasets:[{
+data:[1,2,4,6,9,12,19],
+borderColor:"#00d4ff",
+backgroundColor:"rgba(0,212,255,.2)",
+tension:.4,
+fill:true,
+pointBackgroundColor:"#ff4500"
+}]
+},
+options:{
+responsive:true,
+plugins:{legend:{display:false}},
+scales:{
+y:{beginAtZero:true},
+x:{grid:{display:false}}
+}
+}
 });
 </script>
 
-<!-- WidgetBot -->
 <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" defer></script>
 <script>
-window.addEventListener("DOMContentLoaded", function(){
-  new Crate({
-    server: "1409095276450545779",
-    channel: "1474348703258251276",  // ✅ FIXED
-    notifications: true,
-    indicator: true,
-    theme: "#ff4500",
-    location: ["bottom", "right"]
-  });
+window.addEventListener("DOMContentLoaded",()=>{
+new Crate({
+server:"1409095276450545779",
+channel:"1474372220515123210",
+notifications:true,
+indicator:true,
+theme:"#ff4500",
+location:["bottom","right"]
+});
 });
 </script>
 
