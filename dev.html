@@ -1,316 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DragoraLabs Discord • Join the Dragon's Lair</title>
-  
-  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#0a0e17">
 
-  <!-- WidgetBot (Discord floating widget + status) -->
-  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
+<title>DragoraLabs Discord • Join the Dragon's Lair</title>
 
-  <style>
-    :root {
-      --bg: #0a0e17;
-      --accent: #00d4ff;
-      --dragon-red: #ff4500;
-      --text: #e0f7ff;
-      --text-muted: #a3bffa;
-      --card-bg: rgba(20, 25, 40, 0.7);
-      --border: rgba(0, 212, 255, 0.18);
-    }
+<link rel="icon" type="image/png"
+href="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" />
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      min-height: 100vh;
-      background-image: 
-        radial-gradient(circle at 15% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 85% 30%, rgba(255, 69, 0, 0.06) 0%, transparent 45%);
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
+<!-- Optimized Font Loading -->
+<link rel="preload" as="style"
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap"
+onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap">
+</noscript>
 
-    .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(10, 14, 23, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+<!-- FontAwesome (deferred) -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    .logo-small {
-      font-family: 'Orbitron', monospace;
-      font-size: 2rem;
-      background: linear-gradient(90deg, var(--dragon-red), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #0f172a 0%, #02040a 100%);
-      z-index: -2;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url('https://avatars.githubusercontent.com/u/225836782?s=800&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4') center/cover no-repeat;
-      opacity: 0.05;
-      mix-blend-mode: screen;
-      z-index: -1;
-    }
-
-    .hero-content {
-      max-width: 1100px;
-      z-index: 2;
-    }
-
-    .logo-big {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 5px solid rgba(0,212,255,0.4);
-      box-shadow: 0 0 50px rgba(255,69,0,0.5), 0 0 25px rgba(0,212,255,0.4);
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-size: 4.5rem;
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(90deg, #ff4500, #ff8c00, #00d4ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1.5rem;
-    }
-
-    .subtitle {
-      font-size: 1.6rem;
-      max-width: 800px;
-      margin: 0 auto 3rem;
-      color: var(--text-muted);
-    }
-
-    .discord-widget {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem;
-      max-width: 520px;
-      margin: 0 auto 3rem;
-      text-align: center;
-    }
-
-    .discord-widget h3 {
-      font-size: 2rem;
-      margin-bottom: 1.2rem;
-      color: white;
-    }
-
-    .discord-status {
-      font-size: 1.4rem;
-      margin: 1.2rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .status-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #43b581;
-      box-shadow: 0 0 14px #43b581;
-    }
-
-    .join-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-      background: #5865F2;
-      color: white;
-      padding: 1.2rem 3rem;
-      font-size: 1.4rem;
-      font-weight: 600;
-      border-radius: 50px;
-      text-decoration: none;
-      margin-top: 2rem;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 30px rgba(88,101,242,0.5);
-    }
-
-    .join-btn:hover {
-      transform: translateY(-5px) scale(1.06);
-      box-shadow: 0 0 55px rgba(88,101,242,0.8);
-      background: #4752c4;
-    }
-
-    .chart-container {
-      max-width: 900px;
-      margin: 0 auto 5rem;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.5rem;
-    }
-
-    .chart-container h3 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1.8rem;
-      color: white;
-    }
-
-    footer {
-      text-align: center;
-      padding: 5rem 5% 3rem;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 3.5rem; }
-      .logo-big { width: 140px; height: 140px; }
-      .discord-widget { padding: 1.8rem; }
-      .join-btn { font-size: 1.2rem; padding: 1rem 2.5rem; }
-      .chart-container { padding: 1.8rem; }
-    }
-  </style>
+<style>
+:root {
+  --bg:#0a0e17;
+  --accent:#00d4ff;
+  --dragon-red:#ff4500;
+  --text:#e0f7ff;
+  --text-muted:#a3bffa;
+  --card-bg:rgba(20,25,40,.75);
+  --border:rgba(0,212,255,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(0,212,255,.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(255,69,0,.06) 0%, transparent 45%);
+}
+.topbar{
+  position:fixed;top:0;left:0;right:0;
+  background:rgba(10,14,23,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:1rem 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+.logo-small{
+  font-family:'Orbitron',monospace;
+  font-size:1.8rem;
+  font-weight:700;
+  background:linear-gradient(90deg,var(--dragon-red),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-decoration:none;
+}
+header{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 5% 60px;
+}
+.hero-content{max-width:1100px}
+.logo-big{
+  width:180px;height:180px;
+  border-radius:50%;
+  border:5px solid rgba(0,212,255,.45);
+  box-shadow:0 0 50px rgba(255,69,0,.6);
+  margin-bottom:2rem;
+}
+h1{
+  font-family:'Orbitron',monospace;
+  font-size:4rem;
+  background:linear-gradient(90deg,#ff4500,#ff8c00,#00d4ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:1rem;
+}
+.subtitle{
+  font-size:1.3rem;
+  color:var(--text-muted);
+  margin-bottom:2.5rem;
+}
+.discord-widget,.chart-container{
+  background:var(--card-bg);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2.5rem;
+  margin-bottom:3rem;
+}
+.discord-status{
+  font-size:1.3rem;
+  margin:1rem 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+}
+.status-dot{
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#43b581;
+  box-shadow:0 0 15px #43b581;
+}
+.join-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:1rem;
+  background:#5865F2;
+  color:white;
+  padding:1.2rem 3rem;
+  font-weight:600;
+  border-radius:50px;
+  text-decoration:none;
+  transition:.3s;
+  will-change:transform;
+}
+.join-btn:hover{
+  transform:translateY(-4px) scale(1.05);
+  background:#4752c4;
+}
+footer{
+  text-align:center;
+  padding:4rem 5%;
+  color:var(--text-muted);
+  font-size:.9rem;
+}
+@media(max-width:768px){
+  h1{font-size:2.8rem}
+  .logo-big{width:140px;height:140px}
+}
+</style>
 </head>
 <body>
 
-  <nav class="topbar">
-    <a href="#" class="logo-small">DragoraLabs</a>
-    <a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn">
-      <i class="fab fa-discord"></i> Join Discord
-    </a>
-  </nav>
+<nav class="topbar">
+  <a href="#" class="logo-small">DragoraLabs</a>
+  <a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn">
+    <i class="fab fa-discord"></i> Join Discord
+  </a>
+</nav>
 
-  <header>
-    <div class="hero-content">
-      <img 
-        src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" 
-        alt="DragoraLabs Dragon" 
-        class="logo-big"
-      />
-      <h1>Dragon's Lair</h1>
-      <p class="subtitle">
-        Official DragoraLabs Discord Community<br>
-        Free open-source tools • No paywalls • Real-time support & fun
-      </p>
+<header>
+<div class="hero-content">
 
-      <!-- Live Discord widget + status + join -->
-      <div class="discord-widget">
-        <h3>Live Discord Status</h3>
-        <div class="discord-status">
-          <span class="status-dot"></span>
-          <strong>Connecting...</strong>
-        </div>
+<img src="https://avatars.githubusercontent.com/u/225836782?s=400&v=4"
+alt="DragoraLabs Dragon"
+class="logo-big"
+loading="eager"
+width="180"
+height="180"/>
 
-        <!-- WidgetBot floating crate + status -->
-        <script>
-          new Crate({
-            server: '1409095276450545779',      // your Discord server ID
-            channel: '1474316127491457094', // replace with your welcome/general channel ID
-            notifications: true,
-            indicator: true,
-            theme: '#ff4500'                    // dragon red accent
-          })
-        </script>
+<h1>Dragon's Lair</h1>
 
-        <!-- Big join button -->
-        <a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn" style="margin-top: 2rem; font-size: 1.5rem; padding: 1.3rem 3.5rem;">
-          <i class="fab fa-discord fa-2x"></i> Join the Server Now
-        </a>
-      </div>
+<p class="subtitle">
+Official DragoraLabs Discord<br>
+Free open-source tools • Community • Real-time help
+</p>
 
-      <!-- Simple example growth chart -->
-      <div class="chart-container">
-        <h3>Community Growth (example)</h3>
-        <canvas id="growthChart" height="220"></canvas>
-      </div>
-    </div>
-  </header>
+<div class="discord-widget">
+<h3>Live Server Status</h3>
+<div class="discord-status">
+<span class="status-dot"></span>
+<strong id="live-status">Connecting...</strong>
+</div>
+<a href="https://discord.gg/rScRjWjKPw" target="_blank" class="join-btn">
+<i class="fab fa-discord"></i> Join the Server
+</a>
+</div>
 
-  <footer>
-    <p>
-      <img src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" alt="DragoraLabs" class="footer-logo"/>
-      © 2026 DragoraLabs • Free forever • Join the lair
-    </p>
-  </footer>
+<div class="chart-container">
+<h3>Community Growth</h3>
+<canvas id="growthChart" height="200"></canvas>
+</div>
 
-  <script>
-    // Fake live status update (real one comes from WidgetBot)
-    setTimeout(() => {
-      document.querySelector('.discord-status strong').innerHTML = 
-        '312 members • <span style="color:#43b581">Online now</span>';
-    }, 1800);
+</div>
+</header>
 
-    // Chart.js - example line chart
-    const ctx = document.getElementById('growthChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-        datasets: [{
-          label: 'Members',
-          data: [45, 82, 130, 185, 240, 298, 367],
-          borderColor: '#00d4ff',
-          backgroundColor: 'rgba(0, 212, 255, 0.18)',
-          tension: 0.4,
-          fill: true,
-          pointBackgroundColor: '#ff4500',
-          pointBorderColor: '#fff',
-          pointHoverRadius: 10,
-          pointRadius: 6,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.08)' } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  </script>
+<footer>
+© 2026 DragoraLabs • Free forever • Join the lair
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js/auto" defer></script>
+
+<!-- WidgetBot -->
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" defer></script>
+
+<script defer>
+document.addEventListener("DOMContentLoaded", function () {
+
+const monthNames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const now=new Date();
+const currentMonth=now.getMonth();
+const labels=[];
+for(let i=6;i>=0;i--){
+  labels.push(monthNames[(currentMonth-i+12)%12]);
+}
+
+const initialData=[1,2,4,6,9,12,19];
+
+const ctx=document.getElementById("growthChart").getContext("2d");
+const growthChart=new Chart(ctx,{
+  type:"line",
+  data:{
+    labels:labels,
+    datasets:[{
+      data:initialData,
+      borderColor:"#00d4ff",
+      backgroundColor:"rgba(0,212,255,.2)",
+      tension:.4,
+      fill:true,
+      pointBackgroundColor:"#ff4500"
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{beginAtZero:true},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+async function fetchDiscordStats(){
+  try{
+    const res=await fetch(
+      "https://discord.com/api/v9/invites/rScRjWjKPw?with_counts=true",
+      {cache:"no-store"}
+    );
+    if(!res.ok) throw new Error();
+    const data=await res.json();
+    const members=data.approximate_member_count||0;
+    const online=data.approximate_presence_count||0;
+
+    document.getElementById("live-status").innerHTML=
+      `${members} members • <span style="color:#43b581">${online} online</span>`;
+
+    growthChart.data.datasets[0].data.at(-1)=members;
+    growthChart.update();
+  }catch{
+    document.getElementById("live-status").textContent="Live stats unavailable";
+  }
+}
+
+fetchDiscordStats();
+setInterval(fetchDiscordStats,60000);
+
+new Crate({
+  server:"1409095276450545779",
+  channel:"1474337848546037861",
+  notifications:true,
+  indicator:true,
+  theme:"#ff4500",
+  location:["bottom","right"]
+});
+
+});
+</script>
+
 </body>
 </html>
