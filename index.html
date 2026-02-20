@@ -24,11 +24,7 @@
       --border: rgba(0, 212, 255, 0.18);
     }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       background: var(--bg);
@@ -44,7 +40,6 @@
       overflow-x: hidden;
     }
 
-    /* Enhanced sections for full-viewport feel */
     header, section {
       min-height: 100vh;
       display: flex;
@@ -114,11 +109,7 @@
       cursor: pointer;
     }
 
-    .nav-links a.nav-item:hover {
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
+    .nav-links a.nav-item:hover,
     .nav-links a.nav-item.active {
       color: white;
     }
@@ -139,28 +130,20 @@
       border-radius: 50px;
       font-size: 0.95rem;
       font-weight: 600;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
-    .btn-github { 
-      background: #222; 
-      color: white; 
-    }
-
-    .btn-github:hover { 
-      background: #333;
-      transform: translateY(-2px);
-    }
+    .btn-github { background: #222; color: white; }
+    .btn-github:hover { background: #333; }
 
     .btn-join { 
       background: var(--dragon-red); 
       color: white; 
       box-shadow: 0 0 15px rgba(255,69,0,0.45); 
     }
-
     .btn-join:hover { 
       background: #ff6347; 
-      transform: translateY(-3px) scale(1.05);
+      transform: translateY(-2px); 
       box-shadow: 0 0 28px rgba(255,69,0,0.65); 
     }
 
@@ -194,11 +177,7 @@
       50% { transform: scale(1.05); }
     }
 
-    .hero-content { 
-      max-width: 1100px; 
-      z-index: 2; 
-      text-align: center; 
-    }
+    .hero-content { max-width: 1100px; z-index: 2; text-align: center; }
 
     .logo-container {
       display: flex;
@@ -410,6 +389,7 @@
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       animation: card-slide-up 0.8s ease-out forwards;
+      cursor: pointer; /* ← makes it feel clickable */
     }
 
     .project-card:nth-child(1) { animation-delay: 0.3s; }
@@ -616,7 +596,8 @@
     <div style="max-width: 1300px; margin: 0 auto; width: 100%;">
       <h2>Our Main Open-Source Projects</h2>
       <div class="projects-grid">
-        <div class="project-card">
+        <!-- NodeDash - clickable whole card -->
+        <div class="project-card" onclick="window.open('https://github.com/DragoraLabs/nodedash.github.com', '_blank')">
           <div class="card-img"><i class="fa-solid fa-gauge-high"></i></div>
           <div class="card-content">
             <h3 class="project-title">NodeDash</h3>
@@ -636,7 +617,8 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <!-- Pterodactyl Tools - clickable whole card + new Debian only tag -->
+        <div class="project-card" onclick="window.open('https://github.com/DragoraLabs/pterodactyl', '_blank')">
           <div class="card-img"><i class="fa-solid fa-server"></i></div>
           <div class="card-content">
             <h3 class="project-title">Pterodactyl Tools</h3>
@@ -646,6 +628,7 @@
               <span class="tag">Installer</span>
               <span class="tag">Server</span>
               <span class="tag">Automation</span>
+              <span class="tag" style="background: rgba(0, 128, 255, 0.2); color: #4da6ff;">Debian only</span>
             </div>
           </div>
           <div class="card-footer">
@@ -682,10 +665,8 @@
       slider.style.left = `${el.offsetLeft}px`;
     }
 
-    // Initial
     moveSlider(document.querySelector('.nav-item.active'));
 
-    // Click
     navItems.forEach(item => {
       item.addEventListener('click', function(e) {
         if (this.getAttribute('href').startsWith('#')) {
@@ -702,13 +683,11 @@
       });
     });
 
-    // Resize
     window.addEventListener('resize', () => {
       const active = document.querySelector('.nav-item.active');
       if (active) moveSlider(active);
     });
 
-    // Scroll update active + slider
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -729,12 +708,7 @@
             }
           });
 
-          // Topbar scroll effect
-          if (window.scrollY > 50) {
-            topbar.classList.add('scrolled');
-          } else {
-            topbar.classList.remove('scrolled');
-          }
+          topbar.classList.toggle('scrolled', window.scrollY > 50);
 
           ticking = false;
         });
