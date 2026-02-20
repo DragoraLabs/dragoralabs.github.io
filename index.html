@@ -1,1 +1,338 @@
-here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DragoraLabs — Open-Source Innovation</title>
+  
+  <!-- Favicon (your GitHub avatar, circular crop works great) -->
+  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Free -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --accent: #00d4ff;
+      --accent-dark: #0099cc;
+      --text: #e0f7ff;
+      --text-muted: #a3bffa;
+      --card-bg: rgba(20, 25, 40, 0.65);
+      --border: rgba(0, 212, 255, 0.18);
+      --dragon-red: #ff4500;     /* fallback for dragon accents */
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(255, 69, 0, 0.06) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    header {
+      position: relative;
+      height: 100vh;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5%;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0f172a 0%, #02040a 100%);
+      z-index: -2;
+    }
+
+    /* Optional: subtle dragon logo as very faint background */
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://avatars.githubusercontent.com/u/225836782?s=800&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4') center/cover no-repeat; /* larger size variant */
+      opacity: 0.04;
+      mix-blend-mode: screen;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      z-index: 2;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid rgba(0, 212, 255, 0.4);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.5), 0 0 20px rgba(255, 69, 0, 0.4);
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .logo-avatar:hover {
+      transform: scale(1.08) rotate(5deg);
+    }
+
+    .logo-text {
+      font-family: 'Orbitron', monospace;
+      font-size: 4.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff4500, #ff8c00, #00d4ff, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      color: var(--text-muted);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), #ff4500);
+      color: #000;
+      box-shadow: 0 0 30px rgba(255, 69, 0, 0.4);
+    }
+
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(255, 69, 0, 0.6); }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover { background: rgba(0, 212, 255, 0.12); }
+
+    section { padding: 100px 5%; }
+
+    h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 4rem;
+      background: linear-gradient(90deg, #fff, #ff4500, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255, 69, 0, 0.3);
+      border-color: rgba(255, 69, 0, 0.4);
+    }
+
+    .card-img {
+      height: 220px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      color: rgba(255, 69, 0, 0.5);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.4s ease;
+    }
+
+    .project-card:hover .card-img { color: #ff4500; }
+
+    .card-content { padding: 2rem; }
+
+    .project-title { font-size: 1.6rem; margin-bottom: 0.8rem; color: white; }
+
+    .project-desc { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 69, 0, 0.15);
+      color: #ff8c00;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .stars { color: #ffd700; font-weight: 600; }
+
+    footer {
+      text-align: center;
+      padding: 4rem 5% 2rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .logo-text { font-size: 3.2rem; }
+      .logo-avatar { width: 100px; height: 100px; }
+      h1 { font-size: 2.6rem; }
+      section { padding: 80px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="hero-content">
+      <div class="logo-container">
+        <img 
+          src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" 
+          alt="DragoraLabs Dragon Logo" 
+          class="logo-avatar"
+        />
+        <div class="logo-text">DRAGORA LABS</div>
+      </div>
+
+      <h1>Open-Source Tools Forged in Dragonfire</h1>
+      <p class="subtitle">
+        Empower your workflows with blazing-fast, intelligent, and completely free open-source projects.  
+        Built by DragoraLabs — where innovation meets mythical power.
+      </p>
+      
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <a href="https://github.com/DragoraLabs" target="_blank" class="btn btn-outline">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <h2>Our Main Open-Source Projects</h2>
+    
+    <div class="projects-grid">
+
+      <!-- Your project cards remain the same – just example -->
+      <div class="project-card">
+        <div class="card-img"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="card-content">
+          <h3 class="project-title">NovaPulse</h3>
+          <p class="project-desc">Real-time analytics with AI insights — self-hostable & blazing fast.</p>
+          <div class="tags">
+            <span class="tag">Dashboard</span><span class="tag">AI</span><span class="tag">Analytics</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#" style="color:#ff8c00;text-decoration:none;font-weight:600;">
+            <i class="fa-solid fa-code-branch"></i> GitHub
+          </a>
+          <span class="stars">★ 1.8k</span>
+        </div>
+      </div>
+
+      <!-- Add your real projects here -->
+
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      <img 
+        src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" 
+        alt="DragoraLabs" 
+        class="footer-logo"
+      />
+      © 2026 DragoraLabs — Unleashing open-source dragons. All projects free & open under permissive licenses.
+    </p>
+    <p style="margin-top:1.2rem;">
+      <a href="https://github.com/DragoraLabs" style="color:var(--accent); margin:0 1rem;">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+      <!-- Add Twitter/Discord if you have them -->
+    </p>
+  </footer>
+
+</body>
+</html>
