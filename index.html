@@ -4,15 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DragoraLabs — Free & Fun Open-Source Tools</title>
-  
+ 
   <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" />
-  
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  
+ 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <style>
     :root {
       --bg: #0a0e17;
@@ -23,23 +22,20 @@
       --card-bg: rgba(20, 25, 40, 0.65);
       --border: rgba(0, 212, 255, 0.18);
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', system-ui, sans-serif;
       line-height: 1.6;
       min-height: 100vh;
-      background-image: 
+      background-image:
         radial-gradient(circle at 15% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 85% 30%, rgba(255, 69, 0, 0.06) 0%, transparent 45%);
       background-attachment: fixed;
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
-
     header, section {
       min-height: 100vh;
       display: flex;
@@ -51,16 +47,13 @@
       transform: translateY(30px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
-
     header.visible, section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
     html {
-      scroll-snap-type: y mandatory;
+      scroll-snap-type: y proximity; /* Changed to proximity for smoother scrolling */
     }
-
     .topbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -74,9 +67,7 @@
       align-items: center;
       transition: background 0.3s ease;
     }
-
     .topbar.scrolled { background: rgba(10, 14, 23, 0.98); }
-
     .topbar .logo-small {
       font-family: 'Orbitron', monospace;
       font-size: 1.7rem;
@@ -87,18 +78,15 @@
       text-decoration: none;
       transition: transform 0.3s ease;
     }
-
     .topbar .logo-small:hover {
       transform: scale(1.05);
     }
-
     .nav-links {
       display: flex;
       gap: 2.4rem;
       align-items: center;
       position: relative;
     }
-
     .nav-links a.nav-item {
       color: var(--text-muted);
       text-decoration: none;
@@ -108,12 +96,10 @@
       transition: color 0.3s ease, transform 0.2s ease;
       cursor: pointer;
     }
-
     .nav-links a.nav-item:hover,
     .nav-links a.nav-item.active {
       color: white;
     }
-
     .nav-links .slider {
       position: absolute;
       bottom: -4px;
@@ -124,7 +110,6 @@
                   width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       pointer-events: none;
     }
-
     .nav-links .btn {
       padding: 0.6rem 1.4rem;
       border-radius: 50px;
@@ -132,21 +117,32 @@
       font-weight: 600;
       transition: all 0.3s;
     }
-
     .btn-github { background: #222; color: white; }
     .btn-github:hover { background: #333; }
-
-    .btn-join { 
-      background: var(--dragon-red); 
-      color: white; 
-      box-shadow: 0 0 15px rgba(255,69,0,0.45); 
+    .btn-join {
+      background: var(--dragon-red);
+      color: white;
+      box-shadow: 0 0 15px rgba(255,69,0,0.45);
     }
-    .btn-join:hover { 
-      background: #ff6347; 
-      transform: translateY(-2px); 
-      box-shadow: 0 0 28px rgba(255,69,0,0.65); 
+    .btn-join:hover {
+      background: #ff6347;
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(255,69,0,0.65);
     }
-
+    .btn-discord {
+      background: #5865F2;
+      color: white;
+    }
+    .btn-discord:hover {
+      background: #4752c4;
+    }
+    .btn-status {
+      background: #4CAF50;
+      color: white;
+    }
+    .btn-status:hover {
+      background: #388E3C;
+    }
     header::before {
       content: "";
       position: absolute;
@@ -155,12 +151,10 @@
       z-index: -2;
       animation: gradient-shift 10s ease infinite;
     }
-
     @keyframes gradient-shift {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.8; }
     }
-
     header::after {
       content: "";
       position: absolute;
@@ -171,14 +165,11 @@
       z-index: -1;
       animation: subtle-pulse 8s ease-in-out infinite;
     }
-
     @keyframes subtle-pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
     }
-
     .hero-content { max-width: 1100px; z-index: 2; text-align: center; }
-
     .logo-container {
       display: flex;
       align-items: center;
@@ -188,18 +179,15 @@
       flex-wrap: wrap;
       animation: breathe 7s ease-in-out infinite;
     }
-
     @keyframes breathe {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.025); }
     }
-
     .logo-container:hover {
       animation-play-state: paused;
       transform: scale(1.07) rotate(2deg);
       filter: drop-shadow(0 0 25px rgba(255,69,0,0.6));
     }
-
     .logo-avatar {
       width: 140px;
       height: 140px;
@@ -210,12 +198,10 @@
       transition: all 0.4s ease;
       animation: logo-float 6s ease-in-out infinite;
     }
-
     @keyframes logo-float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-8px); }
     }
-
     .logo-text {
       font-family: 'Orbitron', monospace;
       font-size: 4.2rem;
@@ -226,36 +212,30 @@
       letter-spacing: 2px;
       animation: text-glow 4s ease-in-out infinite alternate;
     }
-
     @keyframes text-glow {
       from { filter: drop-shadow(0 0 10px rgba(0,212,255,0.5)); }
       to { filter: drop-shadow(0 0 20px rgba(255,69,0,0.8)); }
     }
-
-    h1 { 
-      font-size: 3.2rem; 
-      margin-bottom: 1.5rem; 
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
       font-weight: 700;
       transition: all 0.6s ease;
     }
-
     h1:hover {
       transform: scale(1.02);
     }
-
-    .subtitle { 
-      font-size: 1.4rem; 
-      max-width: 720px; 
-      margin: 0 auto 2.5rem; 
+    .subtitle {
+      font-size: 1.4rem;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
       color: var(--text-muted);
       animation: fade-in-up 1s ease-out 0.5s both;
     }
-
     @keyframes fade-in-up {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .cta-buttons {
       display: flex;
       gap: 1.5rem;
@@ -263,7 +243,6 @@
       flex-wrap: wrap;
       animation: fade-in-up 1s ease-out 0.8s both;
     }
-
     .btn {
       padding: 0.9rem 2.2rem;
       font-size: 1.1rem;
@@ -274,7 +253,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .btn::before {
       content: '';
       position: absolute;
@@ -285,28 +263,23 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
       transition: left 0.6s;
     }
-
     .btn:hover::before {
       left: 100%;
     }
-
     .btn-primary {
       background: linear-gradient(90deg, var(--accent), var(--dragon-red));
       color: #000;
       box-shadow: 0 0 30px rgba(255,69,0,0.4);
     }
-
     .btn-primary:hover {
       transform: translateY(-4px) scale(1.05);
       box-shadow: 0 0 60px rgba(255,69,0,0.7);
     }
-
-    section { 
-      padding: 120px 5%; 
+    section {
+      padding: 120px 5%;
       text-align: center;
       position: relative;
     }
-
     h2 {
       font-size: 3rem;
       margin-bottom: 2.5rem;
@@ -315,7 +288,6 @@
       -webkit-text-fill-color: transparent;
       animation: fade-in-up 1s ease-out 0.2s both;
     }
-
     .story {
       max-width: 900px;
       margin: 0 auto;
@@ -329,16 +301,13 @@
       animation: fade-in-up 1s ease-out 0.4s both;
       transition: transform 0.3s ease;
     }
-
     .story:hover {
       transform: translateY(-5px);
     }
-
-    .story p { 
+    .story p {
       margin-bottom: 1.2rem;
       animation: fade-in-left 0.8s ease-out forwards;
     }
-
     .story p:nth-child(1) { animation-delay: 0.5s; }
     .story p:nth-child(2) { animation-delay: 0.7s; }
     .story p:nth-child(3) { animation-delay: 0.9s; }
@@ -349,14 +318,11 @@
     .story p:nth-child(8) { animation-delay: 1.9s; }
     .story p:nth-child(9) { animation-delay: 2.1s; }
     .story p:nth-child(10) { animation-delay: 2.3s; }
-
     @keyframes fade-in-left {
       from { opacity: 0; transform: translateX(-20px); }
       to { opacity: 1; transform: translateX(0); }
     }
-
     .story strong { color: white; }
-
     .story-logo {
       width: 60px;
       height: 60px;
@@ -367,12 +333,10 @@
       box-shadow: 0 0 15px rgba(255,69,0,0.4);
       animation: spin-glow 3s linear infinite;
     }
-
     @keyframes spin-glow {
       0% { transform: rotate(0deg); box-shadow: 0 0 15px rgba(255,69,0,0.4); }
       100% { transform: rotate(360deg); box-shadow: 0 0 25px rgba(255,69,0,0.6); }
     }
-
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -380,7 +344,6 @@
       max-width: 1300px;
       margin: 4rem auto 0;
     }
-
     .project-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -391,20 +354,16 @@
       animation: card-slide-up 0.8s ease-out forwards;
       cursor: pointer; /* ← makes it feel clickable */
     }
-
     .project-card:nth-child(1) { animation-delay: 0.3s; }
     .project-card:nth-child(2) { animation-delay: 0.6s; }
-
     @keyframes card-slide-up {
       from { opacity: 0; transform: translateY(50px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .project-card:hover {
       transform: translateY(-20px) scale(1.02);
       box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(255,69,0,0.4);
     }
-
     .card-img {
       height: 220px;
       background: linear-gradient(135deg, #1e293b, #0f172a);
@@ -416,45 +375,37 @@
       border-bottom: 1px solid var(--border);
       transition: all 0.4s ease;
     }
-
-    .project-card:hover .card-img { 
+    .project-card:hover .card-img {
       color: var(--dragon-red);
       transform: scale(1.1);
     }
-
-    .card-content { 
-      padding: 2rem; 
+    .card-content {
+      padding: 2rem;
       position: relative;
     }
-
-    .project-title { 
-      font-size: 1.6rem; 
-      margin-bottom: 0.8rem; 
+    .project-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
       color: white;
       transition: color 0.3s ease;
     }
-
     .project-card:hover .project-title {
       color: var(--accent);
     }
-
-    .project-desc { 
-      color: var(--text-muted); 
+    .project-desc {
+      color: var(--text-muted);
       margin-bottom: 1.5rem;
       transition: opacity 0.3s ease;
     }
-
     .project-card:hover .project-desc {
       opacity: 0.8;
     }
-
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
       margin-bottom: 1.5rem;
     }
-
     .tag {
       background: rgba(255,69,0,0.15);
       color: #ff8c00;
@@ -464,12 +415,10 @@
       font-weight: 500;
       transition: all 0.3s ease;
     }
-
     .tag:hover {
       background: rgba(255,69,0,0.3);
       transform: translateX(5px);
     }
-
     .card-footer {
       display: flex;
       justify-content: space-between;
@@ -479,22 +428,18 @@
       background: rgba(0,0,0,0.2);
       transition: background 0.3s ease;
     }
-
     .project-card:hover .card-footer {
       background: rgba(0,0,0,0.3);
     }
-
-    .stars { 
-      color: #ffd700; 
+    .stars {
+      color: #ffd700;
       font-weight: 600;
       animation: star-twinkle 2s ease-in-out infinite alternate;
     }
-
     @keyframes star-twinkle {
       from { opacity: 0.7; }
       to { opacity: 1; }
     }
-
     footer {
       text-align: center;
       padding: 4rem 5% 2rem;
@@ -503,7 +448,6 @@
       min-height: 50vh;
       animation: fade-in-up 1s ease-out 1s both;
     }
-
     .footer-logo {
       width: 48px;
       height: 48px;
@@ -512,11 +456,9 @@
       margin-right: 0.8rem;
       transition: transform 0.3s ease;
     }
-
     .footer-logo:hover {
       transform: rotate(360deg);
     }
-
     @media (max-width: 768px) {
       .topbar { padding: 1rem 5%; flex-direction: column; gap: 1.2rem; }
       .nav-links { gap: 1.4rem; justify-content: center; flex-wrap: wrap; }
@@ -530,25 +472,27 @@
   </style>
 </head>
 <body>
-
   <nav class="topbar">
     <a href="#" class="logo-small">DragoraLabs</a>
     <div class="nav-links">
       <a href="#home" class="nav-item active">Home</a>
       <a href="#story" class="nav-item">Story</a>
       <a href="#projects" class="nav-item">Projects</a>
-
       <div class="slider"></div>
-
       <a href="https://dragoralabs.github.io/dev" target="_blank" class="btn btn-join">
         <i class="fa-solid fa-users"></i> Join Team
       </a>
       <a href="https://github.com/DragoraLabs" target="_blank" class="btn btn-github">
         <i class="fa-brands fa-github"></i> GitHub
       </a>
+      <a href="https://discord.gg/rScRjWjKPw" target="_blank" class="btn btn-discord">
+        <i class="fab fa-discord"></i> Discord
+      </a>
+      <a href="https://dragoralabs.statuspage.io/" target="_blank" class="btn btn-status">
+        <i class="fa-solid fa-heart-pulse"></i> Status
+      </a>
     </div>
   </nav>
-
   <header id="home">
     <div class="hero-content">
       <div class="logo-container">
@@ -569,7 +513,6 @@
       </div>
     </div>
   </header>
-
   <section id="story">
     <div style="max-width: 900px; margin: 0 auto;">
       <h2>How DragoraLabs Got Started</h2>
@@ -591,7 +534,6 @@
       </div>
     </div>
   </section>
-
   <section id="projects">
     <div style="max-width: 1300px; margin: 0 auto; width: 100%;">
       <h2>Our Main Open-Source Projects</h2>
@@ -616,7 +558,6 @@
             <span class="stars">★ 0</span>
           </div>
         </div>
-
         <!-- Pterodactyl Tools - clickable whole card + new Debian only tag -->
         <div class="project-card" onclick="window.open('https://github.com/DragoraLabs/pterodactyl', '_blank')">
           <div class="card-img"><i class="fa-solid fa-server"></i></div>
@@ -641,7 +582,6 @@
       </div>
     </div>
   </section>
-
   <footer>
     <p>
       <img src="https://avatars.githubusercontent.com/u/225836782?s=400&u=63eda859b6bcc3fb67c814d06eae921798814727&v=4" alt="DragoraLabs" class="footer-logo"/>
@@ -653,20 +593,16 @@
       </a>
     </p>
   </footer>
-
   <script>
     const navItems = document.querySelectorAll('.nav-item');
     const slider = document.querySelector('.slider');
     const topbar = document.querySelector('.topbar');
-
     function moveSlider(el) {
       if (!el || !slider) return;
       slider.style.width = `${el.offsetWidth}px`;
       slider.style.left = `${el.offsetLeft}px`;
     }
-
     moveSlider(document.querySelector('.nav-item.active'));
-
     navItems.forEach(item => {
       item.addEventListener('click', function(e) {
         if (this.getAttribute('href').startsWith('#')) {
@@ -676,18 +612,15 @@
             block: 'start'
           });
         }
-
         navItems.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
         moveSlider(this);
       });
     });
-
     window.addEventListener('resize', () => {
       const active = document.querySelector('.nav-item.active');
       if (active) moveSlider(active);
     });
-
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -699,7 +632,6 @@
               current = sec.getAttribute('id');
             }
           });
-
           navItems.forEach(item => {
             item.classList.remove('active');
             if (item.getAttribute('href') === `#${current}`) {
@@ -707,15 +639,12 @@
               moveSlider(item);
             }
           });
-
           topbar.classList.toggle('scrolled', window.scrollY > 50);
-
           ticking = false;
         });
         ticking = true;
       }
     });
-
     // Animate sections on scroll
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -724,7 +653,6 @@
         }
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('header, section').forEach(el => observer.observe(el));
   </script>
 </body>
